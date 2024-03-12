@@ -10,7 +10,7 @@ class AnimalController extends Controller
     // Liste tous les animaux
     public function list(Request $request)
     {
-        $animaux = Animal::get();
+        $animaux = Animal::with('TYPE')->get();
         return response()->json($animaux);
     }
 }
