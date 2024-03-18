@@ -23,6 +23,6 @@ jobs:
           with:
             remote-protocol: sftp
             remote-host: ssh-milhet.alwaysdata.net
-            remote-user: milhet
+            remote-user: ${{ secrets.USER }}
             remote-password: ${{ secrets.PASSWORD }}
             remote-path: /home/milhet/www/laravel
