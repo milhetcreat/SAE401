@@ -24,14 +24,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>
+
 // Liste tous les animaux
 Route::get('/animaux', [AnimalController::class, 'list']);
+
+// Liste tous les animaux d'un type
+Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
+
+
+// >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>
 
 // Liste tous les types
 Route::get('/types', [TypeController::class, 'list']);
 
-// Liste tous les animaux d'un type
-Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
+
+// >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
