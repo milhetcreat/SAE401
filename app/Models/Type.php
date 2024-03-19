@@ -14,4 +14,5 @@ class Type extends Model
     }
        
     protected $table ="TYPE";
+    protected $primaryKey = 'ID_TYPE';
 }
