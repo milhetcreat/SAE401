@@ -3,15 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
-<<<<<<< Updated upstream
 use App\Models\Type;
 use App\Models\Utilisateur;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\TypeController;
-=======
-use App\Models\Utilisateur;
-use App\Http\Controllers\AnimalController;
->>>>>>> Stashed changes
 use App\Http\Controllers\UtilisateurController;
 
 /*
@@ -32,16 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Liste tous les animaux
 Route::get('/animaux', [AnimalController::class, 'list']);
 
-<<<<<<< Updated upstream
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [TypeController::class, 'listanimaux']);
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
-=======
-// Liste de tous les utilisateurs
-Route::get('/utilisateurs',[UtilisateurController::class, 'list']);
-
-// Ajout d'un utilisateur
-Route::post('/utilisateurs',[UtilisateurController::class, 'add']);
->>>>>>> Stashed changes
