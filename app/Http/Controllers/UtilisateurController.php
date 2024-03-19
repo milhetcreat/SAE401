@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 class UtilisateurController extends Controller
 {
-<<<<<<< Updated upstream
-    //
-=======
     // Liste tous les utilisateurs
     public function list(Request $request)
     {
@@ -19,9 +16,13 @@ class UtilisateurController extends Controller
     // Ajout d'un utilisateur
     public function add(Request $request)
 
-    $utilisateur = new Utilisateur;
+    $utilisateur = new User;
     $utilisateur->nom = $request->nom;
-    $utilisateur->qte = $request->qte;
+    $utilisateur->prenom = $request->prenom;
+    $utilisateur->genre = $request->genre;
+    $utilisateur->localisation = $request->localisation;
+    $utilisateur->pdp = $request->pdp;
+    $utilisateur->genre = $request->genre;
     $ok = $utilisateur->save();
     if ($ok) {
     return response()->json(["status" => 1, "message" => "Inscription Confirmée"],201);
@@ -30,5 +31,4 @@ class UtilisateurController extends Controller
     l'inscription"],400);
     }
 
->>>>>>> Stashed changes
 }
