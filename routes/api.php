@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
 use App\Models\Type;
-use App\Models\Utilisateur;
+use App\Models\User;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UtilisateurController;
