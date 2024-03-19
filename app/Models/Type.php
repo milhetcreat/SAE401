@@ -11,7 +11,6 @@ class Type extends Model
 
     public function animaux() {
         return $this->hasMany(Animal::class);
-        // return $this->hasMany(Animal::class, 'ID_TYPE', 'id');
     }
        
     protected $table ="TYPE";
