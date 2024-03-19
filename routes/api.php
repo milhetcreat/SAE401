@@ -35,3 +35,5 @@ Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
+
+Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
