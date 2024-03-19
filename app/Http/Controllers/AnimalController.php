@@ -13,4 +13,11 @@ class AnimalController extends Controller
         $animaux = Animal::with('TYPE')->get();
         return response()->json($animaux);
     }
+
+    // Liste tous les animaux d'un type
+    public function listanimaux(Request $request, $id)
+    {
+        $animaux = ANIMAL::where('ID_TYPE' , '=' , $id)->get();
+        return response()->json($animaux);
+    }
 }

@@ -10,8 +10,9 @@ class Animal extends Model
     use HasFactory;
 
     public function type() {
-        return $this->belongsTo(Type::class);
+        return $this->belongsTo(Type::class, 'ID_TYPE', 'id');
     }
 
     protected $table ="ANIMAL";
+    protected $primaryKey = 'ID_ANIMAL';
 }
