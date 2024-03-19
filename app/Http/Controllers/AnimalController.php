@@ -4,22 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use Illuminate\Support\Facades\DB;
 
 class AnimalController extends Controller
 {
-    // Liste tous les animaux
-    // public function list(Request $request)
-    // {
-    //     $animaux = Animal::get();
-    //     return response()->json($animaux);
-    // }
     // Liste tous les animaux + recherche
     public function list(Request $request)
     {
         if ($request->has('search')) {
             $search = $request->search;
-            // $animaux = Animal::with('TYPE')->where('NOM','like',"%".$search."%")->get();
-            $animaux = DB::select('select * from produits where id = ?', [1]);
+            $animaux = Animal::select('ANIMAL.*')->join('TYPE', 'ANIMAL.ID_TYPE', '=', 'TYPE.ID_TYPE')->where('TYPE.NOM', 'like', '%' . $search . '%')->orWhere('ANIMAL.LOCALISATION', 'like', '%' . $search . '%')->orWhere('ANIMAL.RACE', 'like', '%' . $search . '%')->get();
         } else {
             $animaux = Animal::get();
         }
