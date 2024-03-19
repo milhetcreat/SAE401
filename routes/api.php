@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
 use App\Models\Type;
+use App\Models\Utilisateur;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UtilisateurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,6 @@ Route::get('/animaux', [AnimalController::class, 'list']);
 
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [TypeController::class, 'listanimaux']);
+
+// Liste tous les utilisateurs 
+Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
