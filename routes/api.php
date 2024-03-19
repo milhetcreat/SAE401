@@ -28,11 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/animaux', [AnimalController::class, 'list']);
 
 // Liste tous les animaux d'un type
-<<<<<<< Updated upstream
-Route::get('/types/{id}/animaux', [TypeController::class, 'listanimaux']);
+Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
-=======
-Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
->>>>>>> Stashed changes
