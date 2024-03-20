@@ -30,4 +30,29 @@ class AnimalController extends Controller
         $animaux = ANIMAL::where('ID_TYPE' , '=' , $id)->get();
         return response()->json($animaux);
     }
+
+    // Ajout d'un animal
+    public function add(Request $request)
+    {
+        $animal = new Animal;
+        $animal->ID_UTILISATEUR = $request->ID_UTILISATEUR;
+        $animal->ID_ANIMAL = Animal::max('ID_ANIMAL') + 1;
+        $animal->ID_TYPE = $request->ID_TYPE;
+        $animal->PRENOM = $request->PRENOM;
+        $animal->AGE = $request->AGE;
+        $animal->GENRE = $request->GENRE;
+        $animal->TAILLE = $request->TAILLE;
+        $animal->POIDS = $request->POIDS;
+        $animal->PHOTO = $request->PHOTO;
+        $animal->LOCALISATION = $request->LOCALISATION;
+        $animal->RACE = $request->RACE;
+        $animal->SPECIFICITE = $request->SPECIFICITE;
+        $animal->DESCRIPTION = $request->DESCRIPTION;
+        $ok = $animal->save();
+        if ($ok) {
+        return response()->json(["status" => 1, "message" => "Animal ajouté"],201);
+        } else {
+        return response()->json(["status" => 0, "message" => "pb lors de l'ajout"],400);
+        }
+    }
 }
