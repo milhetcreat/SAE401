@@ -29,8 +29,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Liste tous les animaux + recherche (type, localisation et race)
 Route::get('/animaux', [AnimalController::class, 'list']);
 
+// Ajouter un animal
+Route::post('/animaux', [AnimalController::class, 'add']);
+
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
+
+// Liste tous les animaux d'un utilisateur
+// Route::get('/types/{id}/utilisateurs', [AnimalController::class, 'listusers']);
 
 // >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>
 
@@ -43,4 +49,5 @@ Route::get('/types', [TypeController::class, 'list']);
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
 
+// Ajouter un utilisateur
 Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
