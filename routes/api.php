@@ -32,6 +32,9 @@ Route::get('/animaux', [AnimalController::class, 'list']);
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
 
+// Modifier un animal
+Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);
+
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 

@@ -55,4 +55,31 @@ class AnimalController extends Controller
         return response()->json(["status" => 0, "message" => "pb lors de l'ajout"],400);
         }
     }
+
+    // modifier un animal
+    public function modifier(Request $request, $id){
+        $animal = Animal::find($id);
+        if (!$animal) {
+            return response()->json(["status" => 0, "message" => "cet animal n'existe pas"],400);
+        }
+        $animal->ID_UTILISATEUR = $request->ID_UTILISATEUR;
+        $animal->ID_ANIMAL = $request->ID_ANIMAL;
+        $animal->ID_TYPE = $request->ID_TYPE;
+        $animal->PRENOM = $request->PRENOM;
+        $animal->AGE = $request->AGE;
+        $animal->GENRE = $request->GENRE;
+        $animal->TAILLE = $request->TAILLE;
+        $animal->POIDS = $request->POIDS;
+        $animal->PHOTO = $request->PHOTO;
+        $animal->LOCALISATION = $request->LOCALISATION;
+        $animal->RACE = $request->RACE;
+        $animal->SPECIFICITE = $request->SPECIFICITE;
+        $animal->DESCRIPTION = $request->DESCRIPTION;
+        $ok = $animal->save();
+        if ($ok) {
+        return response()->json(["status" => 1, "message" => "animal modifié"],201);
+        } else {
+        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        }
+    }
 }
