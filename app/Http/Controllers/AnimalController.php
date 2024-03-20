@@ -14,6 +14,10 @@ class AnimalController extends Controller
         if ($request->has('search')) {
             $search = $request->search;
             $animaux = Animal::select('ANIMAL.*')->join('TYPE', 'ANIMAL.ID_TYPE', '=', 'TYPE.ID_TYPE')->where('TYPE.NOM', 'like', '%' . $search . '%')->orWhere('ANIMAL.LOCALISATION', 'like', '%' . $search . '%')->orWhere('ANIMAL.RACE', 'like', '%' . $search . '%')->get();
+            // si la recherche n'a pas de résultats : 
+            if ($animaux->isEmpty()) {
+                return response()->json(['message' => 'Aucun résultat trouvé.'], 404);
+            }
         } else {
             $animaux = Animal::get();
         }
