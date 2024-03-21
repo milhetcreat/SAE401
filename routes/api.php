@@ -29,8 +29,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Liste tous les animaux + recherche (type, localisation et race)
 Route::get('/animaux', [AnimalController::class, 'list']);
 
+// Liste tous les animaux + recherche (type, localisation et race)
+Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
+
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
+
 
 // Modifier un animal
 Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);
