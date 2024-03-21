@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
 use App\Models\Type;
 use App\Models\User;
+use App\Models\Favoris;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\FavorisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les animaux + recherche (type, localisation et race)
 Route::get('/animaux', [AnimalController::class, 'list']);
 
-// Liste tous les animaux + recherche (type, localisation et race)
+// Liste tous les animaux d'un utilisateur
 Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
 
 // Ajouter un animal
@@ -44,16 +47,23 @@ Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 
-// Liste tous les animaux d'un utilisateur
-// Route::get('/types/{id}/utilisateurs', [AnimalController::class, 'listusers']);
 
 // >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les types
 Route::get('/types', [TypeController::class, 'list']);
 
 
+// >>>>>>>>>>>>>>>>>>>> Favoris >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Compte le nb de likes sur un animal
+Route::get('/favoris/{id}', [FavorisController::class, 'count']);
+
+
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
