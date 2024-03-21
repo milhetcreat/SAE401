@@ -13,7 +13,10 @@ class AnimalController extends Controller
     {
         if ($request->has('search')) {
             $search = $request->search;
-            $animaux = Animal::select('ANIMAL.*')->join('TYPE', 'ANIMAL.ID_TYPE', '=', 'TYPE.ID_TYPE')->where('TYPE.NOM', 'like', '%' . $search . '%')->orWhere('ANIMAL.LOCALISATION', 'like', '%' . $search . '%')->orWhere('ANIMAL.RACE', 'like', '%' . $search . '%')->get();
+            $animaux = Animal::select('ANIMAL.*')->join('TYPE', 'ANIMAL.ID_TYPE', '=', 'TYPE.ID_TYPE')
+            ->where('TYPE.NOM', 'like', '%' . $search . '%')
+            ->orWhere('ANIMAL.LOCALISATION', 'like', '%' . $search . '%')
+            ->orWhere('ANIMAL.RACE', 'like', '%' . $search . '%')->get();
             // si la recherche n'a pas de résultats : 
             if ($animaux->isEmpty()) {
                 return response()->json(['message' => 'Aucun résultat trouvé.'], 404);
@@ -28,7 +31,12 @@ class AnimalController extends Controller
     public function listusers(Request $request, $id)
     {
         $animaux = ANIMAL::where('ID_UTILISATEUR' , '=' , $id)->get();
-        return response()->json($animaux);
+        if (!$animaux) {
+            return response()->json(["status" => 0, "message" => "Aucun animal !"],400);
+        }
+        else{
+            return response()->json($animaux);
+        }
     }
 
     // Liste tous les animaux d'un type

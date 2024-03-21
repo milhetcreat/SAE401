@@ -61,6 +61,9 @@ Route::get('/types', [TypeController::class, 'list']);
 // Compte le nb de likes sur un animal
 Route::get('/favoris/{id}', [FavorisController::class, 'count']);
 
+// Liste les animaux mis en favoris d'un utilisateur
+Route::get('/favoris/{id}/users', [FavorisController::class, 'list']);
+
 
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
