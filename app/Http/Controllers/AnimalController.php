@@ -27,6 +27,19 @@ class AnimalController extends Controller
         return response()->json($animaux);
     }
 
+    // Liste les détails d'un animal
+    public function details(Request $request, $id)
+    {
+        $animal = Animal::find($id);
+        if ($animal) {
+            // Retournez l'animal trouvé
+            return response()->json($animal);
+        } else {
+            // Retournez une réponse indiquant que l'animal n'a pas été trouvé
+            return response()->json(["status" => 0, "message" => "Animal introuvable"], 404);
+        }
+    }
+
     // Liste tous les animaux d'un utilisateur
     public function listusers(Request $request, $id)
     {
