@@ -35,5 +35,19 @@ class SignalementController extends Controller
         return response()->json(["status" => 0, "message" => "pb lors de l'ajout"],400);
         }
     }
+
+    // supprimer un signalement
+    public function supp(Request $request, $id)
+    {
+        $signalement = Signalement::find($id);
+        if (!$signalement) {
+            return response()->json(["status" => 0, "message" => "ce signalement n'existe pas"],400);
+        }
+        $ok = $signalement->delete();
+        if ($ok) {
+        return response()->json(["status" => 1, "message" => "signalement supprimé"],201);
+        } else {
+        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        }
+    }
 }
-// $dateCreation = $signalement->created_at;

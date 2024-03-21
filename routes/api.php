@@ -76,6 +76,9 @@ Route::get('/signalements', [SignalementController::class, 'list']);
 // Ajouter un signalement
 Route::post('/signalements', [SignalementController::class, 'add']);
 
+// Supprimer un signalement
+Route::delete('/signalements/{id}', [SignalementController::class, 'supp']);
+
 
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
