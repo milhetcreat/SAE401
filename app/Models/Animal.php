@@ -13,6 +13,10 @@ class Animal extends Model
         return $this->belongsTo(Type::class, 'ID_TYPE', 'id');
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     protected $table ="ANIMAL";
     protected $primaryKey = 'ID_ANIMAL';
 

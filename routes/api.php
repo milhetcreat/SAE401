@@ -39,20 +39,6 @@ Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
 
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
-// {
-//     "ID_UTILISATEUR": "1",
-//     "ID_TYPE": "0",
-//     "PRENOM": "truc",
-//     "AGE": "4",
-//     "GENRE": "0",
-//     "TAILLE": "41",
-//     "POIDS": "22",
-//     "PHOTO": "",
-//     "LOCALISATION": "Castres",
-//     "RACE": "Dalmatien",
-//     "SPECIFITE": "Huitre allergie",
-//     "DESCRIPTION": "Très beau",
-//   }
 
 // Supprimer un animal
 Route::delete('/animaux/{id}', [AnimalController::class, 'supp']);
@@ -89,6 +75,7 @@ Route::get('/signalements', [SignalementController::class, 'list']);
 
 // Ajouter un signalement
 Route::post('/signalements', [SignalementController::class, 'add']);
+
 
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
