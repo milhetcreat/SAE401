@@ -35,6 +35,8 @@ Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
 
+// Supprimer un animal
+Route::delete('/animaux/{id}', [AnimalController::class, 'supp']);
 
 // Modifier un animal
 Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);

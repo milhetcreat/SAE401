@@ -89,4 +89,19 @@ class AnimalController extends Controller
         return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
         }
     }
+
+    // supprimer un animal
+    public function supp(Request $request, $id)
+    {
+        $animal = Animal::find($id);
+        if (!$animal) {
+            return response()->json(["status" => 0, "message" => "cet animal n'existe pas"],400);
+        }
+        $ok = $animal->delete();
+        if ($ok) {
+        return response()->json(["status" => 1, "message" => "animal supprimé"],201);
+        } else {
+        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        }
+    }
 }
