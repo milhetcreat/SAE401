@@ -17,7 +17,7 @@ class UtilisateurController extends Controller
     public function add(Request $request)
 
     $utilisateur = new User;
-    $utilisateur->nom = $request->nom;
+    $utilisateur->name = $request->nom;
     $utilisateur->prenom = $request->prenom;
     $utilisateur->genre = $request->genre;
     $utilisateur->localisation = $request->localisation;
@@ -31,4 +31,10 @@ class UtilisateurController extends Controller
     l'inscription"],400);
     }
 
+    // Récupérer les informations d'un utilisateur
+    public function getinfos(Request $request)
+    {
+        $utilisateur = Utilisateur::get();
+        return response()->json($utilisateur);
+    }
 }
