@@ -40,6 +40,18 @@ class AnimalController extends Controller
         }
     }
 
+    // Liste tous les animaux d'un utilisateur
+    public function listusers(Request $request, $id)
+    {
+        $animaux = ANIMAL::where('ID_UTILISATEUR' , '=' , $id)->get();
+        if (!$animaux) {
+            return response()->json(["status" => 0, "message" => "Aucun animal !"],404);
+        }
+        else{
+            return response()->json($animaux);
+        }
+    }
+
     // Liste tous les animaux d'un type
     public function listanimaux(Request $request, $id)
     {
