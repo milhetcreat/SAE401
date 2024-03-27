@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Animal;
 
 class UtilisateurController extends Controller
 {
@@ -36,5 +37,17 @@ class UtilisateurController extends Controller
     {
         $utilisateur = Utilisateur::get();
         return response()->json($utilisateur);
+    }
+
+    // Liste tous les animaux d'un utilisateur
+    public function listusers(Request $request, $id)
+    {
+        $animaux = ANIMAL::where('ID_UTILISATEUR' , '=' , $id)->get();
+        if (!$animaux) {
+            return response()->json(["status" => 0, "message" => "Aucun animal !"],404);
+        }
+        else{
+            return response()->json($animaux);
+        }
     }
 }

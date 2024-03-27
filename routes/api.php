@@ -32,8 +32,8 @@ Route::get('/animaux', [AnimalController::class, 'list']);
 // Liste les détails d'un animal
 Route::get('/animaux/{id}', [AnimalController::class, 'details']);
 
-// Liste tous les animaux d'un utilisateur
-Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
+// Liste le propriétaire de l'animal
+Route::get('/animaux/{id}', [AnimalController::class, 'details-user']);
 
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
@@ -89,3 +89,6 @@ Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
 
 // Récupérer les informations de l'utilisateur connecté
 Route::get('/utilisateurs', [UtilisateurController::class, 'getinfos']);
+
+// Liste tous les animaux d'un utilisateur
+Route::get('/users/{id}/animaux', [UtilisateurController::class, 'listusers']);
