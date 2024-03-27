@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'genre',
+        'prenom',
+        'localisation',
+        'pdp',
+        'admin'
     ];
 
     /**
@@ -45,5 +50,9 @@ class User extends Authenticatable
 
     public function animaux() {
         return $this->hasMany(Animal::class);
+    }
+
+    public function favoris() {
+        return $this->hasMany(Favoris::class);
     }
 }
