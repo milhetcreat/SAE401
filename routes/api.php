@@ -7,6 +7,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\SignalementController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,9 @@ Route::get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
 
 // Modifier les informations d'un utilisateur
 Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
+
+// >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Liste des messages d'une conversation
+Route::get('/messages',[MessageController::class,'list']);
