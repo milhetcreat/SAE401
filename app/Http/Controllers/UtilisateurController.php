@@ -26,8 +26,6 @@ class UtilisateurController extends Controller
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
         $utilisateur->pdp = $request->pdp;
-        var_dump($request);
-        var_dump($utilisateur);
         $ok = $utilisateur->save();
         if ($ok) {
         return response()->json(["status" => 1, "message" => "Inscription Confirmée"],201);
