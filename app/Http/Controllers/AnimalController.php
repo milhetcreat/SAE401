@@ -45,7 +45,7 @@ class AnimalController extends Controller
     {
         $animaux = ANIMAL::where('ID_UTILISATEUR' , '=' , $id)->get();
         if (!$animaux) {
-            return response()->json(["status" => 0, "message" => "Aucun animal !"],400);
+            return response()->json(["status" => 0, "message" => "Aucun animal !"],404);
         }
         else{
             return response()->json($animaux);
@@ -56,7 +56,12 @@ class AnimalController extends Controller
     public function listanimaux(Request $request, $id)
     {
         $animaux = ANIMAL::where('ID_TYPE' , '=' , $id)->get();
-        return response()->json($animaux);
+        if (!$animaux) {
+            return response()->json(["status" => 0, "message" => "Aucun animal !"],404);
+        }
+        else{
+            return response()->json($animaux);
+        }
     }
 
     // Ajout d'un animal
