@@ -14,7 +14,7 @@ class Animal extends Model
     }
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'ID_UTILISATEUR', 'id');
     }
 
     protected $table ="ANIMAL";

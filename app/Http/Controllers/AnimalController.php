@@ -30,7 +30,7 @@ class AnimalController extends Controller
     // Liste les détails d'un animal
     public function details(Request $request, $id)
     {
-        $animal = Animal::find($id);
+        $animal = Animal::with('user')->find($id);
         if ($animal) {
             // Retournez l'animal trouvé
             return response()->json($animal);
