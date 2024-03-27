@@ -89,3 +89,6 @@ Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
 
 // Récupérer les informations de l'utilisateur connecté
 Route::get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
+
+// Modifier les informations d'un utilisateur
+Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);

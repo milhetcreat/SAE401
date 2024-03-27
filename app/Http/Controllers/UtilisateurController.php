@@ -26,6 +26,8 @@ class UtilisateurController extends Controller
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
         $utilisateur->pdp = $request->pdp;
+        var_dump($request);
+        var_dump($utilisateur);
         $ok = $utilisateur->save();
         if ($ok) {
         return response()->json(["status" => 1, "message" => "Inscription Confirmée"],201);
@@ -46,6 +48,27 @@ class UtilisateurController extends Controller
         } else {
             // Retournez une réponse indiquant que les informations sur l'utilisateur n'ont pas été trouvées
             return response()->json(["status" => 0, "message" => "Utilisateur introuvable"], 404);
+        }
+    }
+
+    // modifier un utilisateur
+    public function modifier(Request $request, $id){
+        $utilisateur = User::find($id);
+        if (!$utilisateur) {
+            return response()->json(["status" => 0, "message" => "cet utilisateur n'existe pas"],400);
+        }
+        $utilisateur->name = $request->nom;
+        $utilisateur->email = $request->email;
+        $utilisateur->password = $request->password;
+        $utilisateur->prenom = $request->prenom;
+        $utilisateur->genre = $request->genre;
+        $utilisateur->localisation = $request->localisation;
+        $utilisateur->pdp = $request->pdp;
+        $ok = $utilisateur->save();
+        if ($ok) {
+        return response()->json(["status" => 1, "message" => "utilisateur modifié"],201);
+        } else {
+        return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
 }
