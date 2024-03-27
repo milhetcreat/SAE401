@@ -88,4 +88,4 @@ Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
 Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
 
 // Récupérer les informations de l'utilisateur connecté
-Route::get('/utilisateurs', [UtilisateurController::class, 'getinfos']);
+Route::get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);

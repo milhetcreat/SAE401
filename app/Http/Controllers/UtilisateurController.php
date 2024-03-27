@@ -37,9 +37,16 @@ class UtilisateurController extends Controller
     }
    
     // Récupérer les informations d'un utilisateur
-    public function getinfos(Request $request)
+    public function getinfos(Request $request, $id)
     {
-        $utilisateur = User::get();
-        return response()->json($utilisateur);
+        $utilisateur = User::find($id);
+        if ($utilisateur) {
+            // Retournez les informations trouvées
+            return response()->json($utilisateur);
+        } else {
+            // Retournez une réponse indiquant que les informations sur l'utilisateur n'ont pas été trouvées
+            return response()->json(["status" => 0, "message" => "Utilisateur introuvable"], 404);
+        }
     }
 }
+
