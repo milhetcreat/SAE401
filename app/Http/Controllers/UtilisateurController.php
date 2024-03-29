@@ -26,6 +26,7 @@ class UtilisateurController extends Controller
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
         $utilisateur->pdp = $request->pdp;
+        $utilisateur->telephone = $request->telephone;
         $ok = $utilisateur->save();
         if ($ok) {
         return response()->json(["status" => 1, "message" => "Inscription Confirmée"],201);
@@ -62,6 +63,7 @@ class UtilisateurController extends Controller
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
         $utilisateur->pdp = $request->pdp;
+        $utilisateur->telephone = $request->telephone;
         $ok = $utilisateur->save();
         if ($ok) {
         return response()->json(["status" => 1, "message" => "utilisateur modifié"],201);
