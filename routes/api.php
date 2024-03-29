@@ -95,12 +95,12 @@ Route::get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
 Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
 
 
-// GESTION DES TOKENS POUR LE LOGIN
-Route::post('/login', function(LoginRequest $request){
-    // --LoginRequest a verifié que les email et password étaient présents
-    // --il faut maintenant vérifier que les identifiants sont corrects
-    $credentials = request(['email','password']);
-})
+// // GESTION DES TOKENS POUR LE LOGIN
+// Route::post('/login', function(LoginRequest $request){
+//     // --LoginRequest a verifié que les email et password étaient présents
+//     // --il faut maintenant vérifier que les identifiants sont corrects
+//     $credentials = request(['email','password']);
+// })
 
 // >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
