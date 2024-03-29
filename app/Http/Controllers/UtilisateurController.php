@@ -53,6 +53,7 @@ class UtilisateurController extends Controller
     // modifier un utilisateur
     public function modifier(Request $request, $id){
         $utilisateur = User::find($id);
+        var_dump($utilisateur);
         if (!$utilisateur) {
             return response()->json(["status" => 0, "message" => "cet utilisateur n'existe pas"],400);
         }
