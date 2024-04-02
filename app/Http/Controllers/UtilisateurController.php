@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+
 class UtilisateurController extends Controller
 {
     // Liste tous les utilisateurs
@@ -72,5 +75,27 @@ class UtilisateurController extends Controller
         return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
+
+    public function login(LoginRequest $request){
+        // -- LoginRequest a verifié que les email et password étaient présents
+        // -- il faut maintenant vérifier que les identifiants sont corrects
+        $credentials = request(['email','password']);
+        if(!Auth::attempt($credentials)) {
+        return response()->json([
+        'status' => 0,
+        'message' => 'Utilisateur inexistant ou identifiants incorrects'
+        ],401);
+        }
+        // tout est ok, on peut générer le token
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->plainTextToken;
+        return response()->json([
+        'status' => 1,
+        'accessToken' =>$token,
+        'token_type' => 'Bearer',
+        'user_id' => $user->id
+        ]);
+       }
 }
 

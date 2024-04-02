@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class LoginRequest extends FormRequest
 {
@@ -30,6 +31,6 @@ class LoginRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'status' => 0,
             'message' => $validator->errors()
-        ]))
+        ]));
     }
 }

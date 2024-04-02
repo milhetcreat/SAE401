@@ -4,9 +4,11 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
-
+use Illuminate\Auth\AuthenticationException;
 class Handler extends ExceptionHandler
 {
+
+     
     /**
      * The list of the inputs that are never flashed to the session on validation exceptions.
      *
@@ -26,5 +28,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    // ----- méthode pour gérer une réponse personnalisée si le token n'est pas valide
+ 
+    protected function unauthenticated($request, AuthenticationException $exception) {
+      if ($request->expectsJson()) {
+        return response()->json(['statut' => 0, 'message' => 'token incorrect.'], 401);
+    }
+        return redirect()->guest(route('login'));
     }
 }
