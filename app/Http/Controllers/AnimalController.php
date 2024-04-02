@@ -74,8 +74,6 @@ class AnimalController extends Controller
         $animal->PRENOM = $request->PRENOM;
         $animal->AGE = $request->AGE;
         $animal->GENRE = $request->GENRE;
-        $animal->TAILLE = $request->TAILLE;
-        $animal->POIDS = $request->POIDS;
         $animal->PHOTO = $request->PHOTO;
         $animal->LOCALISATION = $request->LOCALISATION;
         $animal->RACE = $request->RACE;
