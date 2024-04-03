@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Animal;
+use Illuminate\Support\Facades\Route;
 // use Illuminate\Support\Facades\DB;
 
 class AnimalController extends Controller
@@ -67,25 +68,36 @@ class AnimalController extends Controller
     // Ajout d'un animal
     public function add(Request $request)
     {
+        $file = $request->file('PHOTO');
+
         $animal = new Animal;
+
         $animal->ID_UTILISATEUR = $request->ID_UTILISATEUR;
         $animal->ID_ANIMAL = Animal::max('ID_ANIMAL') + 1;
         $animal->ID_TYPE = $request->ID_TYPE;
         $animal->PRENOM = $request->PRENOM;
         $animal->AGE = $request->AGE;
         $animal->GENRE = $request->GENRE;
-        $animal->PHOTO = $request->PHOTO;
+
+        if ($file) {
+            $imageName = "animal" . time() . '.' . $file->extension();
+            $imagePath = storage_path() . '/app/public/files';
+            $file->move($imagePath, $imageName);
+            $animal->PHOTO = $imageName;
+        }
         $animal->LOCALISATION = $request->LOCALISATION;
         $animal->RACE = $request->RACE;
         $animal->SPECIFICITE = $request->SPECIFICITE;
         $animal->DESCRIPTION = $request->DESCRIPTION;
+
         $ok = $animal->save();
+
         if ($ok) {
-        return response()->json(["status" => 1, "message" => "Animal ajouté"],201);
+            return response()->json(["status" => 1, "message" => "Animal ajouté"], 201);
         } else {
-        return response()->json(["status" => 0, "message" => "pb lors de l'ajout"],400);
+            return response()->json(["status" => 0, "message" => "pb lors de l'ajout"], 400);
         }
-    }
+}
 
     // modifier un animal
     public function modifier(Request $request, $id){

@@ -21,6 +21,11 @@ use App\Http\Requests\LoginRequest;
 |
 */
 
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
    });   
@@ -39,6 +44,9 @@ Route::get('/animaux/{id}/users', [AnimalController::class, 'listusers']);
 
 // Ajouter un animal
 Route::post('/animaux', [AnimalController::class, 'add']);
+
+// Ajouter un animal
+Route::post('/photo', [AnimalController::class, 'photo']);
 
 // Supprimer un animal
 Route::delete('/animaux/{id}', [AnimalController::class, 'supp']);
