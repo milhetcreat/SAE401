@@ -86,8 +86,14 @@ Route::middleware('auth:sanctum')->delete('/signalements/{id}', [SignalementCont
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
 
-// Ajouter un utilisateur
-Route::middleware('auth:sanctum')->post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
+// inscrire un utilisateur
+Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
+
+// Ajouter la photo de profil d'un utilisateur
+Route::post('upload', [UtilisateurController::class, 'uploadpdp']);
+
+
+   
 
 // Récupérer les informations de l'utilisateur connecté
 Route::middleware('auth:sanctum')->get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
@@ -107,3 +113,4 @@ Route::middleware('auth:sanctum')->get('/chat',[MessageController::class,'list']
 
 // Liste des messages d'une conversation
 Route::middleware('auth:sanctum')->post('/chat',[MessageController::class,'add']);
+
