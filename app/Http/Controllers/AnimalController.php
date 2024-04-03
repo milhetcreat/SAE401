@@ -66,59 +66,38 @@ class AnimalController extends Controller
     }
 
     // Ajout d'un animal
-    public function add(Request $request){
-    // Récupération de l'image
-    $file = $request->file('PHOTO');
-
-    // Création d'une nouvelle instance d'Animal
-    $animal = new Animal;
-
-    // Assignation des valeurs des autres champs
-    $animal->ID_UTILISATEUR = $request->ID_UTILISATEUR;
-    $animal->ID_ANIMAL = Animal::max('ID_ANIMAL') + 1;
-    $animal->ID_TYPE = $request->ID_TYPE;
-    $animal->PRENOM = $request->PRENOM;
-    $animal->AGE = $request->AGE;
-    $animal->GENRE = $request->GENRE;
-    // Si une image a été envoyée, la sauvegarder et assigner son chemin à PHOTO
-    if ($file) {
-        $imageName = "animal" . time() . '.' . $file->extension();
-        $imagePath = storage_path() . '/app/public/files';
-        $file->move($imagePath, $imageName);
-        $animal->PHOTO = $imageName;
-    }
-    $animal->LOCALISATION = $request->LOCALISATION;
-    $animal->RACE = $request->RACE;
-    $animal->SPECIFICITE = $request->SPECIFICITE;
-    $animal->DESCRIPTION = $request->DESCRIPTION;
-
-    // Enregistrement de l'animal dans la base de données
-    $ok = $animal->save();
-
-    // Réponse JSON en fonction du résultat de l'enregistrement
-    if ($ok) {
-        return response()->json(["status" => 1, "message" => "Animal ajouté"], 201);
-    } else {
-        return response()->json(["status" => 0, "message" => "pb lors de l'ajout"], 400);
-    }
-}
-
-
-    public function photo(Request $request)
+    public function add(Request $request)
     {
         $file = $request->file('PHOTO');
-        $truc = $request->truc;
+
+        $animal = new Animal;
+
+        $animal->ID_UTILISATEUR = $request->ID_UTILISATEUR;
+        $animal->ID_ANIMAL = Animal::max('ID_ANIMAL') + 1;
+        $animal->ID_TYPE = $request->ID_TYPE;
+        $animal->PRENOM = $request->PRENOM;
+        $animal->AGE = $request->AGE;
+        $animal->GENRE = $request->GENRE;
+
         if ($file) {
-            $imageName = "animal".time().'.'.$file->extension();
-            $imagePath = storage_path(). '/app/public/files';
+            $imageName = "animal" . time() . '.' . $file->extension();
+            $imagePath = storage_path() . '/app/public/files';
             $file->move($imagePath, $imageName);
+            $animal->PHOTO = $imageName;
         }
-        return response()->json([
-        'truc' => $truc,
-        'PHOTO' => $imagePath."/".$imageName
-        ]
-        );
-    }
+        $animal->LOCALISATION = $request->LOCALISATION;
+        $animal->RACE = $request->RACE;
+        $animal->SPECIFICITE = $request->SPECIFICITE;
+        $animal->DESCRIPTION = $request->DESCRIPTION;
+
+        $ok = $animal->save();
+
+        if ($ok) {
+            return response()->json(["status" => 1, "message" => "Animal ajouté"], 201);
+        } else {
+            return response()->json(["status" => 0, "message" => "pb lors de l'ajout"], 400);
+        }
+}
 
     // modifier un animal
     public function modifier(Request $request, $id){
