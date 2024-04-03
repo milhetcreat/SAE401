@@ -58,36 +58,6 @@ Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);
 // Liste tous les animaux d'un type
 Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 
-// "AGE"
-// : 
-// "2",
-// "DESCRIPTION"
-// : 
-// "ges",
-// "GENRE"
-// : 
-// 0,
-// "ID_TYPE"
-// : 
-// 0,
-// "ID_UTILISATEUR"
-// : 
-// 1,
-// "LOCALISATION"
-// : 
-// "Castres",
-// "PHOTO"
-// : 
-// "",
-// "PRENOM"
-// : 
-// "Lola",
-// "RACE"
-// : 
-// "JSP",
-// "SPECIFICITE"
-// : 
-// ""
 // >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
