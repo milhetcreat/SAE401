@@ -8,6 +8,7 @@ use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\SignalementController;
 use App\Http\Controllers\MessageController;
+use App\Http\Requests\LoginRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,15 @@ use App\Http\Controllers\MessageController;
 |
 */
 
+<<<<<<< HEAD
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+=======
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+   });   
+>>>>>>> 3a7a314a0346fc4b45df1bcbd27c134e375429a0
 
 // >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -95,20 +102,20 @@ Route::get('/types', [TypeController::class, 'list']);
 Route::get('/favoris/{id}', [FavorisController::class, 'count']);
 
 // Liste les animaux mis en favoris d'un utilisateur
-Route::get('/favoris/{id}/users', [FavorisController::class, 'list']);
+Route::middleware('auth:sanctum')->get('/favoris/{id}/users', [FavorisController::class, 'list']);
 
 
 // >>>>>>>>>>>>>>>>>>>> Signalement >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les signalements
-Route::get('/signalements', [SignalementController::class, 'list']);
+Route::middleware('auth:sanctum')->get('/signalements', [SignalementController::class, 'list']);
 
 // Ajouter un signalement
-Route::post('/signalements', [SignalementController::class, 'add']);
+Route::middleware('auth:sanctum')->post('/signalements', [SignalementController::class, 'add']);
 
 // Supprimer un signalement
-Route::delete('/signalements/{id}', [SignalementController::class, 'supp']);
+Route::middleware('auth:sanctum')->delete('/signalements/{id}', [SignalementController::class, 'supp']);
 
 
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
@@ -117,25 +124,31 @@ Route::delete('/signalements/{id}', [SignalementController::class, 'supp']);
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
 
-// Ajouter un utilisateur
+// inscrire un utilisateur
 Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
 
+// Ajouter la photo de profil d'un utilisateur
+Route::post('upload', [UtilisateurController::class, 'uploadpdp']);
+
+
+   
+
 // Récupérer les informations de l'utilisateur connecté
-Route::get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
+Route::middleware('auth:sanctum')->get('/utilisateurs/{id}', [UtilisateurController::class, 'getinfos']);
 
 // Modifier les informations d'un utilisateur
 Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
 
 
-// // GESTION DES TOKENS POUR LE LOGIN
-// Route::post('/login', function(LoginRequest $request){
-//     // --LoginRequest a verifié que les email et password étaient présents
-//     // --il faut maintenant vérifier que les identifiants sont corrects
-//     $credentials = request(['email','password']);
-// })
+// -- gestion des tokens
+Route::post('/login', [UtilisateurController::class, 'login']);
 
 // >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste des messages d'une conversation
-Route::get('/messages',[MessageController::class,'list']);
+Route::middleware('auth:sanctum')->get('/chat',[MessageController::class,'list']);
+
+// Liste des messages d'une conversation
+Route::middleware('auth:sanctum')->post('/chat',[MessageController::class,'add']);
+

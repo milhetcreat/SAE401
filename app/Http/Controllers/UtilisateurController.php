@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+
 class UtilisateurController extends Controller
 {
     // Liste tous les utilisateurs
@@ -37,6 +40,22 @@ class UtilisateurController extends Controller
     
     }
    
+    // Ajout d'une photo d'un utilisateur
+    public function uploadpdp(Request $request) {
+        $file = $request->file('photo');
+        $truc = $request->truc;
+        if ($file) {
+        $imageName = "categorie".time().'.'.$file->extension();
+        $imagePath = storage_path(). '/app/public/files';
+        $file->move($imagePath, $imageName);
+        }
+        return response()->json([
+        'truc' => $truc,
+        'photo' => $imagePath."/".$imageName
+        ]
+        );
+       }
+
     // Récupérer les informations d'un utilisateur
     public function getinfos(Request $request, $id)
     {
@@ -72,5 +91,27 @@ class UtilisateurController extends Controller
         return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
+
+    public function login(LoginRequest $request){
+        // -- LoginRequest a verifié que les email et password étaient présents
+        // -- il faut maintenant vérifier que les identifiants sont corrects
+        $credentials = request(['email','password']);
+        if(!Auth::attempt($credentials)) {
+        return response()->json([
+        'status' => 0,
+        'message' => 'Utilisateur inexistant ou identifiants incorrects'
+        ],401);
+        }
+        // tout est ok, on peut générer le token
+        $user = $request->user();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->plainTextToken;
+        return response()->json([
+        'status' => 1,
+        'accessToken' =>$token,
+        'token_type' => 'Bearer',
+        'user_id' => $user->id
+        ]);
+       }
 }
 
