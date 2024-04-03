@@ -30,7 +30,7 @@ class MessageController extends Controller
     // Liste tous les messages d'une conversation 
     public function listmessages(MessageRequest $request) {
         
-            $messages = Message::where([['ID_UTILISATEUR', '=' , $request->idutilisateur],['ID_DESTINATAIRE', '=' , $request->iddestinataire],['ID_ANIMAL', '=' , $request->idanimal]])->orWhere([['ID_UTILISATEUR', '=' , $request->iddestinataire],['ID_DESTINATAIRE', '=' , $request->idutilisateur],['ID_ANIMAL', '=' , $request->idanimal]])->->get();
+            $messages = Message::where([['ID_UTILISATEUR', '=' , $request->idutilisateur],['ID_DESTINATAIRE', '=' , $request->iddestinataire],['ID_ANIMAL', '=' , $request->idanimal]])->orWhere([['ID_UTILISATEUR', '=' , $request->iddestinataire],['ID_DESTINATAIRE', '=' , $request->idutilisateur],['ID_ANIMAL', '=' , $request->idanimal]])->orderBy('DATE', 'DESC')->get();
             if (!$messages) {
                 return response()->json(["status" => 0, "message" => "Aucun message échangé avec cet utilisateur pour le moment !"],404);
             }
