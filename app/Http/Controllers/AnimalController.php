@@ -81,7 +81,7 @@ class AnimalController extends Controller
 
         if ($file) {
             $imageName = "animal" . time() . '.' . $file->extension();
-            $imagePath = storage_path() . '/app/public/files';
+            $imagePath = public_path() . '/images';
             $file->move($imagePath, $imageName);
             $animal->PHOTO = $imageName;
         }
