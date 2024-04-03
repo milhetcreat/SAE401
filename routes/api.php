@@ -21,15 +21,15 @@ use App\Http\Requests\LoginRequest;
 |
 */
 
-<<<<<<< HEAD
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-=======
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
    });   
->>>>>>> 3a7a314a0346fc4b45df1bcbd27c134e375429a0
+
 
 // >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
