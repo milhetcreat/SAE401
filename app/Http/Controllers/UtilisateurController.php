@@ -20,6 +20,8 @@ class UtilisateurController extends Controller
 
     // Ajout d'un utilisateur
     public function addutilisateur(Request $request) {
+        $file = $request->file('pdp');
+
         $utilisateur = new User;
         $utilisateur->id = User::max('id') + 1;
         $utilisateur->name = $request->nom;
@@ -28,7 +30,12 @@ class UtilisateurController extends Controller
         $utilisateur->prenom = $request->prenom;
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
-        $utilisateur->pdp = $request->pdp;
+        if ($file) {
+            $imageName = "user" . time() . '.' . $file->extension();
+            $imagePath = public_path() . '/images';
+            $file->move($imagePath, $imageName);
+            $utilisateur->pdp = $imageName;
+        }
         $utilisateur->telephone = $request->telephone;
         $ok = $utilisateur->save();
         if ($ok) {
