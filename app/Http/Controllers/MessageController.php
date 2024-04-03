@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use App\Http\Requests\MessageRequest;
 
 class MessageController extends Controller
 {
@@ -25,10 +26,18 @@ class MessageController extends Controller
     
     }
 
+
     // Liste tous les messages d'une conversation 
-    public function list(Request $request)
-    {
-        $utilisateurs = User::get();
-        return response()->json($utilisateurs);
+    public function listmessages(MessageRequest $request) {
+        
+            $messages = Message::where([['ID_UTILISATEUR', '=' , $request->idutilisateur],['ID_DESTINATAIRE', '=' , $request->iddestinataire],['ID_ANIMAL', '=' , $request->idanimal]])->orWhere([['ID_UTILISATEUR', '=' , $request->iddestinataire],['ID_DESTINATAIRE', '=' , $request->idutilisateur],['ID_ANIMAL', '=' , $request->idanimal]])->->get();
+            if (!$messages) {
+                return response()->json(["status" => 0, "message" => "Aucun message échangé avec cet utilisateur pour le moment !"],404);
+            }
+            else{
+                return response()->json($messages);
+            }     
     }
+
+
 }

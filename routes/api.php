@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
    });   
 
-// >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>> Animaux >>>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les animaux + recherche (type, localisation et race)
@@ -50,14 +50,14 @@ Route::put('/animaux/{id}', [AnimalController::class, 'modifier']);
 Route::get('/types/{id}/animaux', [AnimalController::class, 'listanimaux']);
 
 
-// >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>> Types >>>>>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les types
 Route::get('/types', [TypeController::class, 'list']);
 
 
-// >>>>>>>>>>>>>>>>>>>> Favoris >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>> Favoris >>>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Compte le nb de likes sur un animal
@@ -68,7 +68,7 @@ Route::middleware('auth:sanctum')->get('/favoris/{id}/users', [FavorisController
 
 
 // >>>>>>>>>>>>>>>>>>>> Signalement >>>>>>>>>>>>>>>
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les signalements
 Route::middleware('auth:sanctum')->get('/signalements', [SignalementController::class, 'list']);
@@ -81,7 +81,7 @@ Route::middleware('auth:sanctum')->delete('/signalements/{id}', [SignalementCont
 
 
 // >>>>>>>>>>>>>>>>>>>> Utilisateurs >>>>>>>>>>>>>>>
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste tous les utilisateurs 
 Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
@@ -105,12 +105,16 @@ Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
 // -- gestion des tokens
 Route::post('/login', [UtilisateurController::class, 'login']);
 
-// >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste des messages d'une conversation
-Route::middleware('auth:sanctum')->get('/chat',[MessageController::class,'list']);
+Route::get('/messages',[MessageController::class,'listmessages']);
 
-// Liste des messages d'une conversation
-Route::middleware('auth:sanctum')->post('/chat',[MessageController::class,'add']);
+// Ajout d'un message a une conversation
+Route::middleware('auth:sanctum')->post('/messages',[MessageController::class,'add']);
+
+
+// >>>>>>>>>>>>>>>>>>>> Admin >>>>>>>>>>>>>>>>>>>
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
