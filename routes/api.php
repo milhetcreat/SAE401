@@ -117,7 +117,10 @@ Route::post('/login', [UtilisateurController::class, 'login']);
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste des messages d'une conversation
-Route::get('/messages',[MessageController::class,'listmessages']);
+Route::get('/conversations/messages',[MessageController::class,'listmessages']);
+
+// Liste des conversations d'un utilisateur
+Route::get('/conversations', [MessageController::class,'listconversations']);
 
 // Ajout d'un message a une conversation
 Route::middleware('auth:sanctum')->post('/messages',[MessageController::class,'add']);
