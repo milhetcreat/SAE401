@@ -46,22 +46,6 @@ class UtilisateurController extends Controller
         }
     
     }
-   
-    // Ajout d'une photo d'un utilisateur
-    public function uploadpdp(Request $request) {
-        $file = $request->file('photo');
-        $truc = $request->truc;
-        if ($file) {
-        $imageName = "categorie".time().'.'.$file->extension();
-        $imagePath = storage_path(). '/app/public/files';
-        $file->move($imagePath, $imageName);
-        }
-        return response()->json([
-        'truc' => $truc,
-        'photo' => $imagePath."/".$imageName
-        ]
-        );
-       }
 
     // Récupérer les informations d'un utilisateur
     public function getinfos(Request $request, $id)
