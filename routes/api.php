@@ -108,17 +108,20 @@ Route::middleware('auth:sanctum')->get('/utilisateurs/{id}', [UtilisateurControl
 Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
 
 
-// -- gestion des tokens
+// Login - récupération du login
 Route::post('/login', [UtilisateurController::class, 'login']);
+
+// Déconnexion
+Route::middleware('auth:sanctum')->get('/logout', [UtilisateurController::class, 'logout']);
 
 // >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Liste des messages d'une conversation
-Route::get('/conversations/messages',[MessageController::class,'listmessages']);
+Route::middleware('auth:sanctum')->get('/conversations/messages',[MessageController::class,'listmessages']);
 
 // Liste des conversations d'un utilisateur
-Route::get('/conversations', [MessageController::class,'listconversations']);
+Route::middleware('auth:sanctum')->get('/conversations', [MessageController::class,'listconversations']);
 
 // Ajout d'un message a une conversation
 Route::middleware('auth:sanctum')->post('/messages',[MessageController::class,'add']);

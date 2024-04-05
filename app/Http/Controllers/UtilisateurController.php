@@ -19,6 +19,7 @@ class UtilisateurController extends Controller
 
 
     // Ajout d'un utilisateur
+    // ex: http://localhost/SAE401/public/api/utilisateurs
     public function addutilisateur(Request $request) {
         $file = $request->file('pdp');
 
@@ -48,6 +49,7 @@ class UtilisateurController extends Controller
     }
 
     // Récupérer les informations d'un utilisateur
+    // ex: 
     public function getinfos(Request $request, $id)
     {
         $utilisateur = User::find($id);
@@ -83,7 +85,16 @@ class UtilisateurController extends Controller
         }
     }
 
-    public function login(LoginRequest $request){
+    public function logout(Request $request) {
+        $ok = $request->user()->currentAccessToken()->delete();
+        if ($ok) {
+            return response()->json(["status" => 1, "message" => "utilisateur déconnecté"],201);
+            } else {
+            return response()->json(["status" => 0, "message" => "pb lors de la déconnexion"],400);
+            }
+      }
+
+      public function login(LoginRequest $request){
         // -- LoginRequest a verifié que les email et password étaient présents
         // -- il faut maintenant vérifier que les identifiants sont corrects
         $credentials = request(['email','password']);
@@ -104,5 +115,6 @@ class UtilisateurController extends Controller
         'user_id' => $user->id
         ]);
        }
+
 }
 
