@@ -6,6 +6,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Requests\MessageRequest;
 use App\Http\Requests\ConversationRequest;
+use Illuminate\Support\Facades\DB; 
 
 class MessageController extends Controller
 {
@@ -38,9 +39,10 @@ class MessageController extends Controller
 
 
     // Liste tous les messages d'une conversation 
+    // ex : http://localhost/SAE401/public/api/conversations/messages?idutilisateur=3&iddestinataire=5&idanimal=2
     public function listmessages(MessageRequest $request) {
-        
-            $messages = Message::where([['ID_UTILISATEUR', '=' , $request->idutilisateur],['ID_DESTINATAIRE', '=' , $request->iddestinataire],['ID_ANIMAL', '=' , $request->idanimal]])->orWhere([['ID_UTILISATEUR', '=' , $request->iddestinataire],['ID_DESTINATAIRE', '=' , $request->idutilisateur],['ID_ANIMAL', '=' , $request->idanimal]])->orderBy('DATE', 'DESC')->get();
+
+            $messages = Message::where([['ID_UTILISATEUR', '=' , $request->idutilisateur],['ID_DESTINATAIRE', '=' , $request->iddestinataire],['ID_ANIMAL', '=' , $request->idanimal]])->orWhere([['ID_UTILISATEUR', '=' , $request->iddestinataire],['ID_DESTINATAIRE', '=' , $request->idutilisateur],['ID_ANIMAL', '=' , $request->idanimal]])->orderBy('DATE', 'DESC')->limit(11)->get();
             if (count($messages)==0) {
                 return response()->json(["status" => 0, "message" => "Aucun message échangé entre ces utilisateurs!"],404);
             }
@@ -50,15 +52,16 @@ class MessageController extends Controller
     }
 
     // Liste de toutes les conversation
+    // ex : http://localhost/SAE401/public/api/conversations?idutilisateur=3
     public function listconversations(ConversationRequest $request) {
-
-        $conversations = Message::where('ID_UTILISATEUR', '=', $request->idutilisateur)->get();
-        if (!$conversations) {
-            return response()->json(["status" => 0, "message" => "Aucune conversation pour le moment !"],404);
-        }
-        else{
-            return response()->json($conversations);
+        $maxdate = Message::select(DB::raw('MAX(DATE)'))->where('ID_UTILISATEUR','=',$request->idutilisateur)->groupBy('ID_CONVERSATION');
+        $conversations = Message::select('ID_CONVERSATION', 'CONTENU')->whereIn('DATE',$maxdate)->get();
+            if (!$conversations) {
+                return response()->json(["status" => 0, "message" => "Aucune conversation pour le moment !"],404);
+            }
+            else{
+                return response()->json($conversations);
+            }
         }
     }
-   
-}
+
