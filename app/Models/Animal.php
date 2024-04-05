@@ -16,6 +16,10 @@ class Animal extends Model
     public function user() {
         return $this->belongsTo(User::class, 'ID_UTILISATEUR', 'id');
     }
+    
+    public function messages() {
+        return $this->hasMany(Message::class);
+    }
 
     protected $table ="ANIMAL";
     protected $primaryKey = 'ID_ANIMAL';
