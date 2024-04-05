@@ -55,7 +55,7 @@ class MessageController extends Controller
     // ex : http://localhost/SAE401/public/api/conversations?idutilisateur=3
     public function listconversations(ConversationRequest $request) {
         $maxdate = Message::select(DB::raw('MAX(DATE)'))->where('ID_UTILISATEUR','=',$request->idutilisateur)->groupBy('ID_CONVERSATION');
-        $conversations = Message::select('ID_CONVERSATION', 'CONTENU')->whereIn('DATE',$maxdate)->get();
+        $conversations = Message::select('MESSAGES.*')->whereIn('DATE',$maxdate)->get();
             if (!$conversations) {
                 return response()->json(["status" => 0, "message" => "Aucune conversation pour le moment !"],404);
             }
