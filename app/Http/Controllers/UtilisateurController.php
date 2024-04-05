@@ -67,7 +67,7 @@ class UtilisateurController extends Controller
         if (!$utilisateur) {
             return response()->json(["status" => 0, "message" => "cet utilisateur n'existe pas"],400);
         }
-        $utilisateur->name = $request->nom;
+        $utilisateur->name = $request->name;
         $utilisateur->email = $request->email;
         $utilisateur->password = $request->password;
         $utilisateur->prenom = $request->prenom;

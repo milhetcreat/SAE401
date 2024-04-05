@@ -97,10 +97,8 @@ Route::get('/utilisateurs', [UtilisateurController::class, 'list']);
 // inscrire un utilisateur
 Route::post('/utilisateurs', [UtilisateurController::class, 'addutilisateur']);
 
-// Ajouter la photo de profil d'un utilisateur
-Route::post('upload', [UtilisateurController::class, 'uploadpdp']);
-
-
+// // Ajouter la photo de profil d'un utilisateur
+// Route::post('upload', [UtilisateurController::class, 'uploadpdp']);
    
 
 // Récupérer les informations de l'utilisateur connecté
