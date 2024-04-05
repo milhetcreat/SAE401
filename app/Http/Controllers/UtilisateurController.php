@@ -24,7 +24,7 @@ class UtilisateurController extends Controller
 
         $utilisateur = new User;
         $utilisateur->id = User::max('id') + 1;
-        $utilisateur->name = $request->nom;
+        $utilisateur->name = $request->name;
         $utilisateur->email = $request->email;
         $utilisateur->password = $request->password;
         $utilisateur->prenom = $request->prenom;
