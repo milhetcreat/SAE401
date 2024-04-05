@@ -13,7 +13,7 @@ class Message extends Model
     }
 
     public function animal() {
-        return $this->belongsTo(Message::class, 'ID_ANIMAL', 'ID_ANIMAL');
+        return $this->belongsTo(Animal::class, 'ID_ANIMAL', 'ID_ANIMAL');
     }
 
     public function destinataire() {
