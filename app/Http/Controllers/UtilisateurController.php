@@ -19,6 +19,7 @@ class UtilisateurController extends Controller
 
 
     // Ajout d'un utilisateur
+    // ex: http://localhost/SAE401/public/api/utilisateurs
     public function addutilisateur(Request $request) {
         $file = $request->file('pdp');
 
@@ -46,24 +47,9 @@ class UtilisateurController extends Controller
         }
     
     }
-   
-    // Ajout d'une photo d'un utilisateur
-    public function uploadpdp(Request $request) {
-        $file = $request->file('photo');
-        $truc = $request->truc;
-        if ($file) {
-        $imageName = "categorie".time().'.'.$file->extension();
-        $imagePath = storage_path(). '/app/public/files';
-        $file->move($imagePath, $imageName);
-        }
-        return response()->json([
-        'truc' => $truc,
-        'photo' => $imagePath."/".$imageName
-        ]
-        );
-       }
 
     // Récupérer les informations d'un utilisateur
+    // ex: 
     public function getinfos(Request $request, $id)
     {
         $utilisateur = User::find($id);
@@ -83,7 +69,7 @@ class UtilisateurController extends Controller
         if (!$utilisateur) {
             return response()->json(["status" => 0, "message" => "cet utilisateur n'existe pas"],400);
         }
-        $utilisateur->name = $request->nom;
+        $utilisateur->name = $request->name;
         $utilisateur->email = $request->email;
         $utilisateur->password = $request->password;
         $utilisateur->prenom = $request->prenom;
@@ -99,7 +85,16 @@ class UtilisateurController extends Controller
         }
     }
 
-    public function login(LoginRequest $request){
+    public function logout(Request $request) {
+        $ok = $request->user()->currentAccessToken()->delete();
+        if ($ok) {
+            return response()->json(["status" => 1, "message" => "utilisateur déconnecté"],201);
+            } else {
+            return response()->json(["status" => 0, "message" => "pb lors de la déconnexion"],400);
+            }
+      }
+
+      public function login(LoginRequest $request){
         // -- LoginRequest a verifié que les email et password étaient présents
         // -- il faut maintenant vérifier que les identifiants sont corrects
         $credentials = request(['email','password']);
@@ -120,5 +115,6 @@ class UtilisateurController extends Controller
         'user_id' => $user->id
         ]);
        }
+
 }
 

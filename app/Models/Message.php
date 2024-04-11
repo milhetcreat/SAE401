@@ -12,6 +12,14 @@ class Message extends Model
         return $this->belongsTo(User::class, 'ID_UTILISATEUR', 'id');
     }
 
+    public function animal() {
+        return $this->belongsTo(Animal::class, 'ID_ANIMAL', 'ID_ANIMAL');
+    }
+
+    public function destinataire() {
+        return $this->belongsTo(User::class, 'ID_DESTINATAIRE', 'id');
+    }
+
     protected $table ="MESSAGES";
     protected $primaryKey = 'ID_MESSAGE';
 

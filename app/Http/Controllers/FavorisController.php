@@ -19,7 +19,7 @@ class FavorisController extends Controller
     {
         $animaux = Favoris::join('ANIMAL', 'ANIMAL.ID_ANIMAL', '=', 'FAVORIS.ID_ANIMAL')->where('FAVORIS.ID_UTILISATEUR', $id)->get();
         if (!$animaux) {
-            return response()->json(["status" => 0, "message" => "Aucun animal mis en favoris !"],400);
+            return response()->json(["status" => 0, "message" => "Aucun animal dans vos favoris !"],400);
         }
         else{
             return response()->json($animaux);

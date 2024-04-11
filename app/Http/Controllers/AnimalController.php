@@ -122,7 +122,7 @@ class AnimalController extends Controller
         if ($ok) {
         return response()->json(["status" => 1, "message" => "animal modifié"],201);
         } else {
-        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
 
@@ -137,7 +137,7 @@ class AnimalController extends Controller
         if ($ok) {
         return response()->json(["status" => 1, "message" => "animal supprimé"],201);
         } else {
-        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
 }

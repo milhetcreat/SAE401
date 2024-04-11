@@ -12,7 +12,7 @@ class SignalementController extends Controller
     {
         $signalements = Signalement::get();
         if (!$signalements) {
-            return response()->json(["status" => 0, "message" => "Aucun signalements !"],400);
+            return response()->json(["status" => 0, "message" => "Aucun signalement !"],400);
         }
         else{
             return response()->json($signalements);
@@ -47,7 +47,7 @@ class SignalementController extends Controller
         if ($ok) {
         return response()->json(["status" => 1, "message" => "signalement supprimé"],201);
         } else {
-        return response()->json(["status" => 0, "message" => "pb lors de la suppréssion"],400);
+        return response()->json(["status" => 0, "message" => "pb lors de la suppression"],400);
         }
     }
 }
