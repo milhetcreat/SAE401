@@ -109,7 +109,7 @@ Route::put('/utilisateurs/{id}', [UtilisateurController::class, 'modifier']);
 Route::post('/login', [UtilisateurController::class, 'login']);
 
 // Déconnexion
-Route::middleware('auth:sanctum')->get('/logout', [UtilisateurController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/logout', [UtilisateurController::class, 'logout']);
 
 // >>>>>>>>>>>>>>>>>>>> Messages >>>>>>>>>>>>>>>>
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
