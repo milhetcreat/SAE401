@@ -64,6 +64,8 @@ class UtilisateurController extends Controller
 
     // modifier un utilisateur
     public function modifier(Request $request, $id){
+        $file = $request->file('pdp');
+
         $utilisateur = User::find($id);
         var_dump($utilisateur);
         if (!$utilisateur) {
@@ -75,7 +77,12 @@ class UtilisateurController extends Controller
         $utilisateur->prenom = $request->prenom;
         $utilisateur->genre = $request->genre;
         $utilisateur->localisation = $request->localisation;
-        $utilisateur->pdp = $request->pdp;
+        if ($file) {
+            $imageName = "user" . time() . '.' . $file->extension();
+            $imagePath = public_path() . '/images';
+            $file->move($imagePath, $imageName);
+            $utilisateur->pdp = $imageName;
+        }
         $utilisateur->telephone = $request->telephone;
         $ok = $utilisateur->save();
         if ($ok) {
