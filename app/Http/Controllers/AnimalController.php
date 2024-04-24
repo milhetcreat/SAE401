@@ -101,6 +101,8 @@ class AnimalController extends Controller
 
     // modifier un animal
     public function modifier(Request $request, $id){
+        $file = $request->file('PHOTO');
+
         $animal = Animal::find($id);
         if (!$animal) {
             return response()->json(["status" => 0, "message" => "cet animal n'existe pas"],400);
@@ -111,9 +113,12 @@ class AnimalController extends Controller
         $animal->PRENOM = $request->PRENOM;
         $animal->AGE = $request->AGE;
         $animal->GENRE = $request->GENRE;
-        $animal->TAILLE = $request->TAILLE;
-        $animal->POIDS = $request->POIDS;
-        $animal->PHOTO = $request->PHOTO;
+        if ($file) {
+            $imageName = "user" . time() . '.' . $file->extension();
+            $imagePath = public_path() . '/images';
+            $file->move($imagePath, $imageName);
+            $animal->PHOTO = $imageName;
+        }
         $animal->LOCALISATION = $request->LOCALISATION;
         $animal->RACE = $request->RACE;
         $animal->SPECIFICITE = $request->SPECIFICITE;
